@@ -1,19 +1,2 @@
-GET http://localhost:3000/author/Chinua Achebe
-{
-    "data": {
-        "1": {
-            "author": "Chinua Achebe",
-            "title": "Things Fall Apart",
-            "reviews": {
-                "2": {
-                    "user_id": 1,
-                    "text": "fav book"
-                },
-                "3": {
-                    "user_id": 2,
-                    "text": "science book"
-                }
-            }
-        }
-    }
-}
+curl localhost:8000/author/Chinua%20Achebe
+{"data":{"1":{"author":"Chinua Achebe","title":"Things Fall Apart","reviews":{"1":{"user_id":1,"text":"good book"},"2":{"user_id":1,"text":"fav book"},"3":{"user_id":2,"text":"science book"}}}}}

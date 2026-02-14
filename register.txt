@@ -1,10 +1,4 @@
-POST http://localhost:3000/register
-REQUEST BODY 
-{
-    "username": "user4",
-    "password": "password"
-}
-
-{
-    "message": "User registered successfully"
-}
+curl -X POST localhost:8000/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"user3","password":"password"}'
+{"message":"User registered successfully"}

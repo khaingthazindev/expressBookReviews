@@ -59,7 +59,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
   for (let i in books) {
     if (i === isbn) {
       books[i].reviews[Object.keys(books[i].reviews).length + 1] = newReview;
-      res.json(books[i].reviews);
+      res.status(200).json(books[i].reviews);
     }
   }
 });

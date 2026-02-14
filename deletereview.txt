@@ -1,5 +1,5 @@
-PUT http://localhost:3000/customer/auth/book/1/review/1
+curl -b token.txt -X DELETE localhost:8000/customer/auth/book/2/review/1
+{"message":"No permission."}
 
-{
-    "message": "Review deleted"
-}
+curl -b token.txt -X DELETE localhost:8000/customer/auth/book/2/review/2
+{"message":"Review deleted"}
