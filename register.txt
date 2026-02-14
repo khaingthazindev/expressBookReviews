@@ -1,0 +1,10 @@
+POST http://localhost:3000/register
+REQUEST BODY 
+{
+    "username": "user4",
+    "password": "password"
+}
+
+{
+    "message": "User registered successfully"
+}
