@@ -1,4 +1,11 @@
-curl -X POST localhost:8000/customer/login \
+curl -X POST http://localhost:8000/customer/login \
   -H "Content-Type: application/json" \
-  -d '{"username":"user3","password":"password"}'
-{"message":"Login successful","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJib2R5IjozLCJpYXQiOjE3NzEwNjE4OTN9.Oz7v5jvj-L8lyeroc9ftGZclQwI-n0BTgMVc1T42u9A"}
+  -d '{"username":"user3","password":"passwordd"}' \
+  -c token.txt
+{"message":"Invalid credentials"}
+
+curl -X POST http://localhost:8000/customer/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"user3","password":"password"}' \
+  -c token.txt
+{"message":"Login successful!"}

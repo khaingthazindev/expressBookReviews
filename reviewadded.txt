@@ -2,4 +2,4 @@ curl -b token.txt -X PUT localhost:8000/customer/auth/review/2 \
 -H "Content-Type: application/json" \
 -d '{"review":"fav book"}'
 
-{"1":{"user_id": 2,"text":"favorite book"},"2":{"user_id":3,"text":"fav book"}}
+{"message":"Review added successfully for ISBN 2.","reviews":{"1":{"user_id":3,"text":"fav book"}}}

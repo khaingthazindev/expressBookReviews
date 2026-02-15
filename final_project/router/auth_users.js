@@ -43,7 +43,7 @@ regd_users.post("/login", async (req, res) => {
   };
 
   return res.status(200).json({
-    message: "Login successful",
+    message: `${username} successfully login.`,
     token: accessToken,
   });
 });
@@ -59,12 +59,15 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
   for (let i in books) {
     if (i === isbn) {
       books[i].reviews[Object.keys(books[i].reviews).length + 1] = newReview;
-      res.status(200).json(books[i].reviews);
+      res.status(200).json({
+        message: `Review added successfully for ISBN ${isbn}.`,
+        reviews: books[i].reviews,
+      });
     }
   }
 });
 
-regd_users.put("/auth/book/:isbn/review/:id", (req, res) => {
+regd_users.put("/auth/review/:isbn/:id", (req, res) => {
   let isbn = req.params.isbn;
   let id = req.params.id;
   let reviewText = req.body.review;
@@ -84,23 +87,29 @@ regd_users.put("/auth/book/:isbn/review/:id", (req, res) => {
   }
 });
 
-regd_users.delete("/auth/book/:isbn/review/:id", (req, res) => {
+regd_users.delete("/auth/review/:isbn/:id", (req, res) => {
   let isbn = req.params.isbn;
   let id = req.params.id;
   let authId = req.user.body;
   for (let i in books) {
     if (i === isbn) {
-      if (books[i].reviews[id].user_id !== authId) {
-        res.status(403).json({ message: "No permission." });
-      }
-      let reviews = books[i].reviews;
-      if (!reviews[id]) {
-        res.status(404).json({ message: "Review not found" });
-      }
+      if (Object.keys(books[id].reviews).length > 0) {
+        if (books[i].reviews[id].user_id !== authId) {
+          res
+            .status(403)
+            .json({ message: "No permission to delete this review." });
+        }
+        let reviews = books[i].reviews;
+        if (!reviews[id]) {
+          res.status(404).json({ message: "Review not found" });
+        }
 
-      delete reviews[id];
+        delete reviews[id];
 
-      res.json({ message: "Review deleted" });
+        res
+          .status(204)
+          .json({ message: `Review for ISBN ${isbn} was deleted` });
+      }
     }
   }
 });

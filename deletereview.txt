@@ -1,5 +1,7 @@
-curl -b token.txt -X DELETE localhost:8000/customer/auth/book/2/review/1
-{"message":"No permission."}
+curl -b token.txt -X DELETE http://localhost:8000/customer/auth/review/:isbn/:reviewId
 
-curl -b token.txt -X DELETE localhost:8000/customer/auth/book/2/review/2
-{"message":"Review deleted"}
+curl -b token.txt -X DELETE http://localhost:8000/customer/auth/review/2/1
+{"message":"No permission to delete this review."}
+
+curl -b token.txt -X DELETE http://localhost:8000/customer/auth/review/2/2
+{"message":"Review for ISBN 2 was deleted"}
